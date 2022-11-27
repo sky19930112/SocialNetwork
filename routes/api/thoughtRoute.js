@@ -20,4 +20,12 @@ router.route("/:thoughtId")
   .put(updateThought)
   .delete(deleteThought);
 
+// route to localhost/api/thought/:thoughtId/reaction
+router.route('/:thoughtId/reaction')
+  .post(addReaction);
+
+// route to localhost/api/thought/:thoughtId/reaction/:reactionId
+router.route('/:thoughtId/reaction/:reactionId')
+  .delete(deleteReaction);
+
 module.exports = router;

@@ -100,6 +100,34 @@ const thoughtController = {
     })
       .catch((err) => res.status(500).json(err));
   },
+  //add reaction to thought
+  addReaction(req, res) {
+    Thought.findOneAndUpdate(
+     {_id: req.params.thoughtID},
+     {$addToSet: {reactions: req.body}},
+     {runValidators: true, new: true}
+    )
+    .then((thought) =>
+      !thought
+        ? res.status(404).json({message: "can not find this ID"})
+        : res.json(thought)
+    )
+    .catch((err) => res.status(500).json(err))
+  },
+  //delete reaction
+  deleteReaction(req, res) {
+    Thought.findOneAndUpdate(
+      {_id: req.params.thoughtID},
+      {$pull:{reactions: {reactionID: req.params.reactionID}}},
+      {runValidators: true, new: true}
+    )
+    .then((thought) =>
+     !thought
+      ? res.status(404).json({message: "ID not matching"})
+      : res.json(thought)
+    )
+    .catch((err) => res.status(500).json(err));
+  }
 };
 
 module.exports = thoughtController;
