@@ -1,15 +1,13 @@
-const { Schema, model, Types } = require('mongoose');
-// import moment module to format the timestamp 
+const { Schema, model } = require('mongoose');
 
 
-// thought schema
 const thoughtSchema = new Schema (
     {
       thought: {
         type: String,
         required: true,
         minlength: 1,
-        maxlength: 500
+        maxlength: 280
       },
       username: {
         type: String,
@@ -25,7 +23,7 @@ const thoughtSchema = new Schema (
     }
 )
 
-// create the User model using the UserSchema
-const Thought = model('thought', thoughtSchema);
-// export the Thought model
+
+const Thought = model('Thought', thoughtSchema);
+
 module.exports = Thought;

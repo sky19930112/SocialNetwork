@@ -12,7 +12,7 @@ const userController = {
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
       .select('-__v')
-      .populate("thoughts")
+      .populate("thought")
       .populate("friends")
       .then((user) =>
         !user
@@ -58,7 +58,7 @@ const userController = {
        if (!user) {
           return res.status(404).json({ message: 'No user with this id!' });
         }
-        return Thought.deleteMany({ _id: { $in: user.thoughts } });
+        return Thought.deleteMany({ _id: { $in: user.thought } });
       })
       .then(() => {
         res.json({ message: 'User and thought deleted!' });
