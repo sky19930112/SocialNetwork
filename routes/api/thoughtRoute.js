@@ -14,18 +14,18 @@ router.route("/")
   .get(getThought)
   .post(createThought);
 
-// route to localhost/api/thought/:thoughtId
-router.route("/:thoughtId")
+// route to localhost/api/thought/:thoughtID
+router.route("/:thoughtID")
   .get(getSingleThought)
   .put(updateThought)
   .delete(deleteThought);
 
-// route to localhost/api/thought/:thoughtId/reaction
-router.route('/:thoughtId/reaction')
+// route to localhost/api/thought/:thoughtID/reaction
+router.route('/:thoughtID/reaction')
   .post(addReaction);
 
-// route to localhost/api/thought/:thoughtId/reaction/:reactionId
-router.route('/:thoughtId/reaction/:reactionId')
+// route to localhost/api/thought/:thoughtID/reaction/:reactionId
+router.route('/:thoughtID/reaction/:reactionId')
   .delete(deleteReaction);
 
 module.exports = router;

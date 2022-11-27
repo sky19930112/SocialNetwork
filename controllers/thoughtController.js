@@ -9,7 +9,7 @@ const thoughtController = {
 
 
   getSingleThought(req, res) {
-    Thought.findOne({ _id: req.params.thoughtId })
+    Thought.findOne({ _id: req.params.thoughtID })
       .select("-__v")
       .then((thought) => {
         if (!thought) {
@@ -40,7 +40,7 @@ const thoughtController = {
 
   updateThought(req, res) {
     Thought.findOneAndUpdate(
-      { _id: req.params.thoughtId },
+      { _id: req.params.thoughtID },
       { $set: req.body },
       { runValidators: true, New: true }
     )
@@ -54,14 +54,14 @@ const thoughtController = {
 
 
   deleteThought(req, res) {
-    Thought.findOneAndDelete({ _id: req.params.thoughtId })
+    Thought.findOneAndDelete({ _id: req.params.thoughtID })
       .then((thought) => {
         if (!thought) {
           return res.status(404).json({ message: 'ID error' });
         }
         return User.findOneAndUpdate(
-          { thought: req.params.thoughtId },
-          { $pull: { thought: req.params.thoughtId } },
+          { thought: req.params.thoughtID },
+          { $pull: { thought: req.params.thoughtID } },
           { new: true }
         );
       })
@@ -75,7 +75,7 @@ const thoughtController = {
 
   addReaction(req, res) {
     Thought.findOneAndUpdate(
-      { _id: req.params.thoughtId },
+      { _id: req.params.thoughtID },
       { $addToSet: { reactions: req.body } },
       { runValidators: true, new: true }
     )
@@ -89,7 +89,7 @@ const thoughtController = {
 
   deleteReaction(req, res) {
     Thought.findOneAndUpdate(
-      { _id: req.params.thoughtId },
+      { _id: req.params.thoughtID },
       { $pull: { reactions: { reactionId: req.params.reactionId } } },
       { runValidators: true, new: true }
     )
